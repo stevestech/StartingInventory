@@ -35,7 +35,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
-@Mod(modid = "StartingInventory", version = "1.0.0", acceptableRemoteVersions = "*")
+@Mod(modid = "StartingInventorySirEdition", version = "1.0.0", acceptableRemoteVersions = "*")
 public class StartingInventory
 {    
     @EventHandler

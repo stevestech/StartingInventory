@@ -1,6 +1,6 @@
 [
 {
-  "modid": "StartingInventory",
+  "modid": "StartingInventorySirEdition",
   "name": "Starting Inventory",
   "description": "Players receive a custom inventory when joining the game for the first time. Use the /setStartingInventory command to use your inventory as the template.",
   "version": "1.0.0",

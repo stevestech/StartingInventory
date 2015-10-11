@@ -72,6 +72,7 @@ public class SetStartingInventory implements ICommand {
             
             try
             {
+            	ConfigHandler.configFolder.mkdirs();
                 output = new FileOutputStream(ConfigHandler.NBTInventoryFile);
                 CompressedStreamTools.writeCompressed(nbtCompoundToWrite, output);
                 output.close();
@@ -95,8 +96,13 @@ public class SetStartingInventory implements ICommand {
     @Override
     public boolean canCommandSenderUseCommand(ICommandSender commandSender)
     {
-        GameProfile gameProfile = ((EntityPlayerMP) commandSender).getGameProfile();
-        return FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().canSendCommands(gameProfile);
+    	if (commandSender instanceof EntityPlayerMP)
+    	{
+    		GameProfile gameProfile = ((EntityPlayerMP) commandSender).getGameProfile();
+    		return FMLCommonHandler.instance().getMinecraftServerInstance().getConfigurationManager().canSendCommands(gameProfile);
+    	}
+    	
+    	return false;
     }
 
     @Override
