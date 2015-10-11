@@ -37,16 +37,16 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
 @Mod(modid = "StartingInventory", version = "1.0.0", acceptableRemoteVersions = "*")
 public class StartingInventory
-{	
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event)
-	{
-		// Create file objects for useful folders and files
-		ConfigHandler.configFolder = new File(event.getModConfigurationDirectory(), "startingInventory");
-		ConfigHandler.NBTInventoryFile = new File(ConfigHandler.configFolder, "inventory.dat");
-	}
-	
-	
+{    
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent event)
+    {
+        // Create file objects for useful folders and files
+        ConfigHandler.configFolder = new File(event.getModConfigurationDirectory(), "startingInventory");
+        ConfigHandler.NBTInventoryFile = new File(ConfigHandler.configFolder, "inventory.dat");
+    }
+    
+    
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
@@ -56,44 +56,44 @@ public class StartingInventory
     @EventHandler
     public void serverLoad(FMLServerStartingEvent event)
     {
-    	// Register mod commands
-    	event.registerServerCommand(new SetStartingInventory());    	
+        // Register mod commands
+        event.registerServerCommand(new SetStartingInventory());        
     }
     
     
     @EventHandler
     public void serverLoaded(FMLServerStartedEvent event)
     {
-    	// Create file objects for useful folders and files
-		ConfigHandler.worldFolder = DimensionManager.getCurrentSaveRootDirectory();
-		ConfigHandler.previousLoginFolder = new File(ConfigHandler.worldFolder, "startingInventory");
-    	
-    	// Register Forge event handlers
-		MinecraftForge.EVENT_BUS.register(new PlayerLoginHandler());
-		
-		// Load starting inventory from the inventory.dat file if it exists
-		if (ConfigHandler.NBTInventoryFile.exists())
-		{
-			InputStream input;
-			NBTTagCompound nbtCompoundToRead;
-			
-			try
-			{
-				// Read the NBT tag compound from the inventory.dat file
-				input = new FileInputStream(ConfigHandler.NBTInventoryFile);
-				nbtCompoundToRead = CompressedStreamTools.readCompressed(input);
-				
-				// Get the NBTTagList which describes the InventoryPlayer object
-				// Use the ID for NBTTagCompound, as this is the data type that the TagList contains
-				ConfigHandler.nbtStartingInventory = nbtCompoundToRead.getTagList("Inventory", nbtCompoundToRead.getId());
-				
-				input.close();
-			}
+        // Create file objects for useful folders and files
+        ConfigHandler.worldFolder = DimensionManager.getCurrentSaveRootDirectory();
+        ConfigHandler.previousLoginFolder = new File(ConfigHandler.worldFolder, "startingInventory");
+        
+        // Register Forge event handlers
+        MinecraftForge.EVENT_BUS.register(new PlayerLoginHandler());
+        
+        // Load starting inventory from the inventory.dat file if it exists
+        if (ConfigHandler.NBTInventoryFile.exists())
+        {
+            InputStream input;
+            NBTTagCompound nbtCompoundToRead;
+            
+            try
+            {
+                // Read the NBT tag compound from the inventory.dat file
+                input = new FileInputStream(ConfigHandler.NBTInventoryFile);
+                nbtCompoundToRead = CompressedStreamTools.readCompressed(input);
+                
+                // Get the NBTTagList which describes the InventoryPlayer object
+                // Use the ID for NBTTagCompound, as this is the data type that the TagList contains
+                ConfigHandler.nbtStartingInventory = nbtCompoundToRead.getTagList("Inventory", nbtCompoundToRead.getId());
+                
+                input.close();
+            }
 
-			catch(IOException ex)
-			{
-				ex.printStackTrace();
-			}
-		}
+            catch(IOException ex)
+            {
+                ex.printStackTrace();
+            }
+        }
     }
 }

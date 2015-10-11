@@ -7,11 +7,11 @@ import net.minecraft.nbt.NBTTagList;
 
 public class ConfigHandler
 {
-	public static File configFolder;
-	public static File worldFolder;
-	
-	public static File NBTInventoryFile;
-	public static File previousLoginFolder;
-	
-	public static NBTTagList nbtStartingInventory;
+    public static File configFolder;
+    public static File worldFolder;
+    
+    public static File NBTInventoryFile;
+    public static File previousLoginFolder;
+    
+    public static NBTTagList nbtStartingInventory;
 }
